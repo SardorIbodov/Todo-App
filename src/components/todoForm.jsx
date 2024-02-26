@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-export const TodoForm = ({edit, onSubmit}) => {
+export const TodoForm = ({ edit, onSubmit }) => {
   const [input, setInput] = useState(edit ? edit.value : " ");
 
   const inputRef = useRef(null);
@@ -14,11 +14,12 @@ export const TodoForm = ({edit, onSubmit}) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onSubmit({
-      id: Math.floor(Math.random() * 10000),
-      text: input,
-    });
-
+    if (input.trim().length > 0) {
+      onSubmit({
+        id: Math.floor(Math.random() * 10000),
+        text: input,
+      });
+    } else alert("Enter a valid todo!");
     setInput("");
   };
 
